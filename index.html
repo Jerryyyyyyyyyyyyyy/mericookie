@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine Forever? 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            position: relative;
+            cursor: none;
+        }
+
+        /* Floating hearts background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            transform: rotate(-45deg);
+            animation: float 6s infinite linear;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background: #ff6b9d;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+        }
+
+        .heart:after {
+            transform: rotate(45deg);
+            top: 10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(-45deg) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff6b9d, transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Proposal text with typing animation */
+        .proposal-text {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 2rem;
+            background: #fff;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Buttons container */
+        .buttons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        /* Yes button */
+        .yes-btn {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            transform: translateY(0);
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        /* No button */
+        .no-btn {
+            background: linear-gradient(45deg, #a8e6cf, #b8f2e6);
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .no-btn:hover {
+            transform: translate(20px, -10px) !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Hover messages for No button */
+        .hover-message {
+            position: fixed;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ff6b9d;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hover-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Success screen */
+        .success-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .success-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .success-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: white;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .ring-gif {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+
+        /* Confetti canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Hearts explosion */
+        .hearts-explosion {
+            position: fixed;
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        .explosion-heart {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .btn {
+                width: 200px;
+                padding: 15px 30px;
+            }
+        }
+
+        /* Hide default cursor */
+        body.cursor-none * {
+            cursor: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO3/8N2QQAoUXrTp66hVFApGn+DyvmwhBSq+2/LDeSFHO
