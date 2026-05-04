@@ -220,6 +220,29 @@ no.addEventListener("click", (e)=>{
   moving = true;
   move();
 
+  // text change every 2 sec
+  setInterval(()=>{
+    no.innerText = texts[Math.floor(Math.random()*texts.length)];
+  },2000);
+});
+
+no.addEventListener("mouseenter", ()=>{
+  if(moving){
+    dx *= 1.2;
+    dy *= 1.2;
+  }
+});
+
+no.addEventListener("click", (e)=>{
+  e.preventDefault();
+
+  const r = no.getBoundingClientRect();
+  x = r.left;
+  y = r.top;
+
+  moving = true;
+  move();
+
   setInterval(()=>{
     no.innerText = texts[Math.floor(Math.random()*texts.length)];
   },2000);
