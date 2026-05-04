@@ -192,7 +192,7 @@ const no = document.getElementById("no");
 let texts = ["NO 💔", "Plss don't 😭", "Mat jao 😢", "Soch lo 😭💖"];
 let moving = false;
 let x = 0, y = 0;
-let dx = 3, dy = 3;
+let dx = 1.2, dy = 1.2;
 
 function move(){
   if(!moving) return;
@@ -264,28 +264,6 @@ no.addEventListener("click",(e)=>{
 
   spawnFakeButtons(); // 😈 clones
 });
-
-// ===== FAKE NO BUTTONS 💀 =====
-function spawnFakeButtons(){
-  for(let i=0;i<5;i++){
-    let clone=no.cloneNode(true);
-    clone.innerText="NO 😈";
-    document.body.appendChild(clone);
-
-    let cx=Math.random()*window.innerWidth;
-    let cy=Math.random()*window.innerHeight;
-
-    function run(){
-      cx+=Math.random()*6-3;
-      cy+=Math.random()*6-3;
-      clone.style.position="fixed";
-      clone.style.left=cx+"px";
-      clone.style.top=cy+"px";
-      requestAnimationFrame(run);
-    }
-    run();
-  }
-}
 
 // ===== DODGE MOUSE =====
 document.addEventListener("mousemove",(e)=>{
