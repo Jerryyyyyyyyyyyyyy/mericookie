@@ -1,291 +1,531 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Ultimate Proposal 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Priya ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-  margin:0;
-  overflow:hidden;
-  font-family:sans-serif;
-  background:linear-gradient(135deg,#ffd6e0,#ffe6f0,#fff0f5);
+    background:black;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* CARD */
-.container{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  background:rgba(255,255,255,0.4);
-  backdrop-filter:blur(15px);
-  padding:30px;
-  border-radius:20px;
-  color:#ff4d6d;
-  z-index:10;
+/* INTRO */
+
+.intro{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+    position:relative;
 }
 
-/* TEXT */
-#text{margin-bottom:20px;font-size:22px}
+.intro h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
 
-/* BUTTONS */
+.intro p{
+    opacity:.8;
+    margin-bottom:30px;
+    font-size:1.2rem;
+}
+
+.btns{
+    display:flex;
+    gap:20px;
+}
+
 button{
-  padding:12px 25px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
+    padding:14px 30px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:600;
+    transition:.3s;
 }
 
-.yes{background:#ff4d6d;color:white;}
-.no{background:#999;color:white;}
+.yes{
+    background:#ff2e63;
+    color:white;
+    box-shadow:0 0 20px rgba(255,46,99,.5);
+}
 
-/* HEARTS */
+.no{
+    background:white;
+    color:black;
+    position:relative;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    position:relative;
+}
+
+.hero h2{
+    font-size:5rem;
+    color:#ff2e63;
+    text-shadow:0 0 25px #ff2e63;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:1.3rem;
+    max-width:700px;
+    opacity:.85;
+    line-height:1.8;
+}
+
+/* TIMELINE */
+
+.timeline{
+    padding:100px 20px;
+}
+
+.timeline h2{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#111;
+    padding:25px;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#ff2e63;
+    box-shadow:0 0 30px rgba(255,46,99,.4);
+}
+
+.card h3{
+    color:#ff2e63;
+    margin-bottom:12px;
+}
+
+.card p{
+    opacity:.8;
+    line-height:1.7;
+}
+
+/* GAME */
+
+.game{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:relative;
+}
+
+.game h2{
+    font-size:3rem;
+    margin-bottom:40px;
+}
+
 .heart{
-  position:absolute;
-  font-size:20px;
-  animation:float 6s linear infinite;
+    position:absolute;
+    font-size:5rem;
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+}
+
+/* FINAL */
+
+.final{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+
+.final h1{
+    font-size:4rem;
+}
+
+.final button{
+    margin-top:30px;
+    background:#ff2e63;
+    color:white;
+}
+
+.hidden-message{
+    display:none;
+    margin-top:40px;
+    animation:fade 2s forwards;
+}
+
+.hidden-message h2{
+    font-size:3rem;
+    color:#ff2e63;
+}
+
+.hidden-message p{
+    margin-top:20px;
+    line-height:2;
+    font-size:1.3rem;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart{
+    position:fixed;
+    color:#ff2e63;
+    pointer-events:none;
+    animation:float 5s linear forwards;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-100px);}
+
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100vh) scale(2);
+        opacity:0;
+    }
+
 }
 
-/* CELEBRATION */
-.celebrate{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#ff4d6d,#ff85a2,#ffd6e0);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:white;
-  font-size:35px;
+/* CURSOR HEART */
+
+.cursor-heart{
+    position:fixed;
+    pointer-events:none;
+    color:#ff2e63;
+    animation:cursorFade 1s linear forwards;
 }
+
+@keyframes cursorFade{
+    to{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h2{
+    font-size:3rem;
+}
+
+.final h1{
+    font-size:2.5rem;
+}
+
+.intro h1{
+    font-size:2.2rem;
+}
+
+.timeline h2,
+.game h2{
+    font-size:2rem;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div id="text"></div>
-  <button class="yes" onclick="yes()">YES 💘</button>
-  <button class="no" id="no">NO 💔</button>
-</div>
+<!-- INTRO -->
 
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b1f54.mp3">
-</audio>
+<section class="intro">
+
+    <h1>Before entering...</h1>
+
+    <p>
+        Do you know how much I love you?
+    </p>
+
+    <div class="btns">
+
+        <button class="yes" onclick="goNext()">
+            Maybe ❤️
+        </button>
+
+        <button class="no" id="noBtn">
+            No 😭
+        </button>
+
+    </div>
+
+</section>
+
+<!-- HERO -->
+
+<section class="hero" id="hero">
+
+    <h2>Priya ❤️</h2>
+
+    <p>
+        Out of 8 billion people...
+        my favorite notification is still yours.
+    </p>
+
+</section>
+
+<!-- TIMELINE -->
+
+<section class="timeline">
+
+    <h2>Timeline Of Us</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>First Talk</h3>
+
+            <p>
+                Still remember being nervous for no reason 😭
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Late Night Talks</h3>
+
+            <p>
+                Somehow every conversation with you feels too short.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Favorite Moment</h3>
+
+            <p>
+                That one moment I replay in my head daily.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Today</h3>
+
+            <p>
+                Still choosing you. Every single day.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GAME -->
+
+<section class="game">
+
+    <h2>Catch My Heart 😭</h2>
+
+    <div class="heart" id="heart">
+        ❤️
+    </div>
+
+</section>
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <h1>One Last Thing...</h1>
+
+    <button onclick="showMessage()">
+        Press Carefully
+    </button>
+
+    <div class="hidden-message" id="message">
+
+        <h2>
+            In every universe...
+        </h2>
+
+        <p>
+            I'd still choose you.<br>
+            Again.<br>
+            Again.<br>
+            Again ❤️
+        </p>
+
+    </div>
+
+</section>
 
 <script>
 
-// ===== TYPING =====
-let msg="Hey cookie 💖 Will you be mine forever?";
-let i=0;
-function type(){
-  if(i<msg.length){
-    document.getElementById("text").innerHTML+=msg[i];
-    i++;
-    setTimeout(type,80);
-  }
-}
-type();
+/* RUNNING BUTTON */
 
-// ===== YES =====
-function yes(){
-  document.body.innerHTML = `
-  <div style="
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff4d6d,#ff85a2,#ffd6e0);
-    color:white;
-    font-family:sans-serif;
-    text-align:center;
-    overflow:hidden;
-  ">
+const noBtn = document.getElementById("noBtn");
 
-    <div style="
-      font-size:48px;
-      font-weight:bold;
-      animation:fadeUp 1s ease;
-    ">
-      💖 I KNEW IT 💖
-    </div>
+noBtn.addEventListener("mouseover", () => {
 
-    <div style="
-      margin-top:15px;
-      font-size:22px;
-      opacity:0.9;
-      animation:fadeUp 1.5s ease;
-    ">
-      Thank you for saying yes ✨<br>
-      Our forever starts now 💍
-    </div>
+    const x = Math.floor(Math.random() * 300) - 150;
+    const y = Math.floor(Math.random() * 300) - 150;
 
-    <div style="
-      font-size:90px;
-      margin-top:25px;
-      animation:heartbeat 1s infinite;
-    ">
-      💗
-    </div>
+    noBtn.style.transform =
+    `translate(${x}px, ${y}px)`;
 
-  </div>
+});
 
-  <style>
-  @keyframes heartbeat{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.3);}
-    100%{transform:scale(1);}
-  }
+/* SCROLL */
 
-  @keyframes fadeUp{
-    0%{opacity:0; transform:translateY(40px);}
-    100%{opacity:1; transform:translateY(0);}
-  }
+function goNext(){
 
-  @keyframes fall{
-    0%{transform:translateY(0);}
-    100%{transform:translateY(100vh);}
-  }
-  </style>
-  `;
+    document.getElementById("hero")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
 
-  // falling hearts 💖
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.innerHTML="💖";
-    h.style.position="fixed";
-    h.style.left=Math.random()*100+"%";
-    h.style.top="0";
-    h.style.fontSize="20px";
-    h.style.animation="fall 3s linear";
-    document.body.appendChild(h);
-
-    setTimeout(()=>h.remove(),3000);
-  },120);
-}
-// ===== CONFETTI =====
-function confetti(){
-  for(let i=0;i<120;i++){
-    let c=document.createElement("div");
-    c.innerHTML="✨";
-    c.style.position="fixed";
-    c.style.left=Math.random()*100+"%";
-    c.style.top="0";
-    c.style.animation="float 2s linear";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),2000);
-  }
 }
 
-// ===== NO BUTTON CHAOS =====
-const no = document.getElementById("no");
+/* HEART GAME */
 
-let texts = ["NO 💔", "Plss don't 😭", "Mat jao 😢", "Soch lo 😭💖"];
-let moving = false;
-let x = 0, y = 0;
-let dx = 1.2, dy = 1.2;
+const heart = document.getElementById("heart");
 
-function move(){
-  if(!moving) return;
+heart.addEventListener("mouseover", () => {
 
-  x += dx;
-  y += dy;
+    const x = Math.random() * (window.innerWidth - 100);
 
-  if(x < 0 || x > window.innerWidth - 100) dx *= -1;
-  if(y < 0 || y > window.innerHeight - 50) dy *= -1;
+    const y = Math.random() * (window.innerHeight - 100);
 
-  no.style.position = "fixed";
-  no.style.left = x + "px";
-  no.style.top = y + "px";
+    heart.style.left = x + "px";
 
-  requestAnimationFrame(move);
+    heart.style.top = y + "px";
+
+});
+
+heart.addEventListener("click", () => {
+
+    alert("Too late 😭 You already stole it long ago ❤️");
+
+});
+
+/* FINAL MESSAGE */
+
+function showMessage(){
+
+    document.getElementById("message")
+    .style.display = "block";
+
+    floatingHearts();
+
 }
 
-no.addEventListener("click", (e)=>{
-  e.preventDefault();
+/* FLOATING HEARTS */
 
-  const r = no.getBoundingClientRect();
-  x = r.left;
-  y = r.top;
+function floatingHearts(){
 
-  moving = true;
-  move();
+    setInterval(() => {
 
-  // text change every 2 sec
-  setInterval(()=>{
-    no.innerText = texts[Math.floor(Math.random()*texts.length)];
-  },2000);
+        const heart = document.createElement("div");
+
+        heart.classList.add("floating-heart");
+
+        heart.innerHTML = "❤️";
+
+        heart.style.left =
+        Math.random() * window.innerWidth + "px";
+
+        heart.style.bottom = "-20px";
+
+        heart.style.fontSize =
+        Math.random() * 30 + 20 + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        },5000);
+
+    },300);
+
+}
+
+/* CURSOR HEART TRAIL */
+
+document.addEventListener("mousemove", (e) => {
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("cursor-heart");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = e.clientX + "px";
+
+    heart.style.top = e.clientY + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    },1000);
+
 });
-
-no.addEventListener("mouseenter", ()=>{
-  if(moving){
-    dx *= 1.2;
-    dy *= 1.2;
-  }
-});
-
-no.addEventListener("click", (e)=>{
-  e.preventDefault();
-
-  const r = no.getBoundingClientRect();
-  x = r.left;
-  y = r.top;
-
-  moving = true;
-  move();
-
-  setInterval(()=>{
-    no.innerText = texts[Math.floor(Math.random()*texts.length)];
-  },2000);
-});
-
-no.addEventListener("mouseenter", ()=>{
-  if(moving){
-    dx *= 1.2;
-    dy *= 1.2;
-  }
-});
-// click start
-no.addEventListener("click",(e)=>{
-  e.preventDefault();
-  const r=no.getBoundingClientRect();
-  x=r.left; y=r.top;
-  moving=true;
-  move(no);
-
-  spawnFakeButtons(); // 😈 clones
-});
-
-// ===== DODGE MOUSE =====
-document.addEventListener("mousemove",(e)=>{
-  if(moving){
-    let dist=Math.hypot(e.clientX-x,e.clientY-y);
-    if(dist<120){
-      dx+=(x-e.clientX)/40;
-      dy+=(y-e.clientY)/40;
-    }
-  }
-});
-
-// ===== HEARTS =====
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML=["💖","💕","💗"][Math.floor(Math.random()*3)];
-  h.style.left=Math.random()*100+"%";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},200);
 
 </script>
+
 </body>
 </html>
